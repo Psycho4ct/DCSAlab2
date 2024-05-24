@@ -1,8 +1,11 @@
 #include "HTTPServer.hpp"
 #include <requests.h>
 #include "./Utility/Utility.hpp"
+#include "clientmain_test.cpp"
+#include "gtest/gtest.h"
 
 using namespace std;
+
 
 void add(){
     http_headers head;
@@ -232,14 +235,15 @@ string str = "0.0.0.0:7777/user/" + h;
     }
 }
 
+
+
 int main()
 {
-
 
         int command=0;
         int exit=1;
     while (exit==1) {
-        std::cout << " 1.Логин 2.Выход 3.Зарегестрироваться\n 4.Вывести список всех пользователей\n 5.Найти пользователя по id\n 6.Удалить пользователя(только админ)\n 7.Изменить пользователя(только админ)\n 8.Кто я?\n";
+        std::cout << " 1.Логин 2.Выход 3.Зарегестрироваться\n 4.Вывести список всех пользователей\n 5.Найти пользователя по id\n 6.Удалить пользователя(только админ)\n 7.Изменить пользователя(только админ)\n 8.Кто я?\n 9.Провести тестирование\n";
         std::cout << "Введите команду: ";
         cin>>command;
 
@@ -288,6 +292,11 @@ int main()
                 whoami();
                 break;
 
+            case 9:
+            ::testing::InitGoogleTest();
+                return RUN_ALL_TESTS();
+            break;
+
             case 0:
                 exit=0;
                  break;
@@ -296,5 +305,30 @@ int main()
 
         
         return 0;
+    
+}
+
+TEST(LoginTests, SuccessfulLogin) {
+
+
+   // Имитируем ввод данных для регистрации пользователя
+    std::stringstream ss_add;
+    ss_add << "admin\n123\nadmin\nsuperadmin\n";
+    std::cin.rdbuf(ss_add.rdbuf());
+
+    // Вызываем функцию add() для регистрации пользователя
+    add();
+
+    // Имитируем ввод данных для входа в систему
+    std::stringstream ss_login;
+    ss_login << "admin\n123\n";
+    std::cin.rdbuf(ss_login.rdbuf());
+
+    // Вызываем функцию login() для входа в систему
+    login();
+
+    // Проверяем, что клиент успешно авторизовался
+    EXPECT_EQ(current_user, 0);
+
     
 }

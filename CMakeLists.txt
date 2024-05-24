@@ -1,9 +1,12 @@
 cmake_minimum_required(VERSION 3.0)
-project(http-server)
+project(http-server-client)
 
 set(TARGET_NAME "http-server-client")
 set(TARGET_NAME2 "http-server")
 set(TARGET_NAME3 "http-client")
+#set(TARGET_NAME4 "http-client-test")
+
+find_package(GTest REQUIRED)
 
 set(LIBHV_INCLUDE ${PROJECT_BINARY_DIR}/contrib/libhv/include/hv)
 
@@ -23,6 +26,14 @@ ${CMAKE_CURRENT_SOURCE_DIR}/src/Utility/*.h
   ${CMAKE_CURRENT_SOURCE_DIR}/src/HTTPClient/*.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/HTTPClient/*.hpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/HTTPClient/*.h )
+
+#file(GLOB_RECURSE SOURCES_CLIENT_TEST
+#${CMAKE_CURRENT_SOURCE_DIR}/src/Utility/*.cpp
+#${CMAKE_CURRENT_SOURCE_DIR}/src/Utility/*.hpp
+#${CMAKE_CURRENT_SOURCE_DIR}/src/Utility/*.h
+ # ${CMAKE_CURRENT_SOURCE_DIR}/src/HTTPClientTest/*.cpp
+ # ${CMAKE_CURRENT_SOURCE_DIR}/src/HTTPClientTest/*.hpp
+ # ${CMAKE_CURRENT_SOURCE_DIR}/src/HTTPClientTest/*.h )
 
 file(GLOB_RECURSE SOURCES_SERVER
 ${CMAKE_CURRENT_SOURCE_DIR}/src/Utility/*.cpp
@@ -53,3 +64,7 @@ target_link_libraries(${TARGET_NAME2} hv_static)
 
 add_executable(${TARGET_NAME3} ${SOURCES_CLIENT})
 target_link_libraries(${TARGET_NAME3} hv_static)
+target_link_libraries(${TARGET_NAME3} GTest::GTest)
+
+#add_executable(${TARGET_NAME4} ${SOURCES_CLIENT_TEST})
+#target_link_libraries(${TARGET_NAME4} hv_static)

@@ -65,7 +65,9 @@
         "cinttypes": "cpp",
         "typeinfo": "cpp",
         "valarray": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "any": "cpp",
+        "set": "cpp"
     },
     "cmake.configureOnOpen": false
 }
