@@ -13,5 +13,6 @@ EOF
 
 cp ./build/http-server ./deb_pakage/bin/
 cp ./build/http-client ./deb_pakage/bin/
+cp ./build/http-client-test ./deb_pakage/bin/
 
 dpkg-deb --build ./deb_pakage/ http-server-client-dcsa.deb
