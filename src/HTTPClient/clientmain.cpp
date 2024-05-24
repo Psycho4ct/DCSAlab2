@@ -1,7 +1,6 @@
 #include "HTTPServer.hpp"
 #include <requests.h>
 #include "./Utility/Utility.hpp"
-#include "clientmain_test.cpp"
 #include "gtest/gtest.h"
 
 using namespace std;
@@ -235,7 +234,25 @@ string str = "0.0.0.0:7777/user/" + h;
     }
 }
 
+// TEST(LoginTests, SuccessfulLogin) {
+//     // Имитируем ввод данных для регистрации пользователя
+//     std::stringstream ss_add;
+//     ss_add << "admin\n123\nadmin\nsuperadmin\n";
+//     std::cin.rdbuf(ss_add.rdbuf());
 
+//     // Вызываем функцию add() для регистрации пользователя
+//     add();
+//     // Имитируем ввод данных для входа в систему
+//     std::stringstream ss_login;
+//     ss_login << "admin\n123\n";
+//     std::cin.rdbuf(ss_login.rdbuf());
+
+//     // Вызываем функцию login() для входа в систему
+//     login();
+
+//     // Проверяем, что клиент успешно авторизовался
+//     EXPECT_EQ(current_user, 0);
+// }
 
 int main()
 {
@@ -270,20 +287,20 @@ int main()
                 break;
 
             case 6://delete
-            if(current_user==-1){
+                if(current_user==-1){
                     cout<<"Sign in,please"<<endl;
-            }
-            else{
+                }
+                else{
                     del();
-            }
+                }
                 
                 break;
 
             case 7://change
             if(current_user==-1){
                     cout<<"Sign in,please"<<endl;
-            }
-            else{
+                }
+                else{
                 change();
                 }
                 break;
@@ -293,9 +310,9 @@ int main()
                 break;
 
             case 9:
-            ::testing::InitGoogleTest();
+                ::testing::InitGoogleTest();
                 return RUN_ALL_TESTS();
-            break;
+                break;
 
             case 0:
                 exit=0;
@@ -308,27 +325,3 @@ int main()
     
 }
 
-TEST(LoginTests, SuccessfulLogin) {
-
-
-   // Имитируем ввод данных для регистрации пользователя
-    std::stringstream ss_add;
-    ss_add << "admin\n123\nadmin\nsuperadmin\n";
-    std::cin.rdbuf(ss_add.rdbuf());
-
-    // Вызываем функцию add() для регистрации пользователя
-    add();
-
-    // Имитируем ввод данных для входа в систему
-    std::stringstream ss_login;
-    ss_login << "admin\n123\n";
-    std::cin.rdbuf(ss_login.rdbuf());
-
-    // Вызываем функцию login() для входа в систему
-    login();
-
-    // Проверяем, что клиент успешно авторизовался
-    EXPECT_EQ(current_user, 0);
-
-    
-}
